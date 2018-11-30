@@ -1,0 +1,17 @@
+af653fc54257f75c655ab4665fee0c88 *DESCRIPTION
+a684be44d099b53155e6045fae2418c2 *LICENSE
+52e13a98dc254fafd2acfdbab5d55b29 *NAMESPACE
+99ac63324ca0d4ea19f633b150d4334f *NEWS.md
+df806208f39a3104e9d7495944c6779c *R/functions.R
+5bf7cdd5490d6ec9712ed1f6bde2e1e0 *R/utils.R
+16b394f0fdc81322580d9c895fba98cf *README.md
+4f33d97d3a4602bd461aa8690a02eec9 *build/vignette.rds
+d41d8cd98f00b204e9800998ecf8427e *inst/CITATION
+605658daadd3b04814e7231ac5258830 *inst/doc/comparative-analysis.R
+463247eb1a45870ed5bc7f155dccda8f *inst/doc/comparative-analysis.Rmd
+9e5d4a7f86c0d595781fa22e74662a2b *inst/doc/comparative-analysis.html
+7e894092fc95a94bc54cb151ed5d2eb7 *man/fishtree_alignment.Rd
+34b73c09e1c3c38fbca171281c8b5e8e *man/fishtree_phylogeny.Rd
+ec2df28c31fc844b0c6cf8fffd55b119 *man/fishtree_taxonomy.Rd
+a5121cd7cc9beee6b4faeb288c0db853 *man/fishtree_tip_rates.Rd
+463247eb1a45870ed5bc7f155dccda8f *vignettes/comparative-analysis.Rmd
