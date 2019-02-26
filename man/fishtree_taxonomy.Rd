@@ -4,24 +4,23 @@
 \alias{fishtree_taxonomy}
 \title{Get taxonomies and other data from the Fish Tree of Life}
 \usage{
-fishtree_taxonomy(family = NULL, order = NULL)
+fishtree_taxonomy(ranks = NULL)
 }
 \arguments{
-\item{family}{One or more families to retrieve.}
-
-\item{order}{One or more orders to retrieve.}
+\item{ranks}{One or more taxonomic ranks to retrieve.}
 }
 \value{
-A list, with components containing data on the specified family or order.
+A list, with components containing data on the specified taxa. If `ranks`
+is unspecified, a data frame with all valid taxa is returned instead.
 }
 \description{
-Retrieves taxonomic and other information from the Fish Tree of Life API. Either
-`family` or `order` must be specified.
+Retrieves taxonomic and other information from the Fish Tree of Life API.
 }
 \examples{
-test <- fishtree_taxonomy(family = "Labridae")
-paste("There are ", length(test$sampled_species), "sampled species out of",
-      length(test$species), "in wrasses.")
+tax <- fishtree_taxonomy(rank = "Labridae")
+n_total <- length(tax$Labridae$species)
+n_sampl <- length(tax$Labridae$sampled_species)
+paste("There are", n_sampl, "sampled species out of", n_total, "in wrasses.")
 }
 \references{
 Rabosky, D. L., Chang, J., Title, P. O., Cowman, P. F., Sallan, L., Friedman, M., Kashner, K., Garilao, C., Near, T. J., Coll, M., Alfaro, M. E. (2018). An inverse latitudinal gradient in speciation rate for marine fishes. Nature, 559(7714), 392–395. doi:10.1038/s41586-018-0273-1

@@ -26,9 +26,17 @@
     return(get(url, envir = .cache))
   }
 
-  if (rlang::is_missing(reader)) rlang::abort("reader` must be specified when `url` is not in the cache.")
+  if (rlang::is_missing(reader)) {
+    rlang::abort("reader` must be specified when `url` is not in the cache.")
+  }
   tmp <- tempfile()
-  utils::download.file(url, tmp, quiet = quiet)
+  res <- tryCatch(suppressWarnings(utils::download.file(url, tmp, quiet = quiet)),
+                  error = function(e) {
+                    rlang::abort(paste("Download for URL", url, "failed with error:\n  ", e, "\nCheck your network status and consider retrying your request."))
+                  })
+  if (res != 0L) {
+    rlang::abort(paste("Download for URL", url, "failed with error code", res))
+  }
   assign(url, reader(tmp, ...), envir = .cache)
   .get(url)
 }
@@ -63,14 +71,13 @@
     name <- name[1]
   }
 
-  if (endsWith(name, "idae")) {
-    context <- fishtree_taxonomy(family = name)
-    what <- "family"
-  } else if (endsWith(name, "iformes")) {
-    context <- fishtree_taxonomy(order = name)
-    what <- "order"
+  tax <- fishtree_taxonomy()
+  what <- tax[tax$name == name, "rank"]
+
+  if (length(what) == 1) {
+    context <- fishtree_taxonomy(name)
   } else {
-    rlang::abort(paste0("Can't find data for `", name, "`` (only families and orders are currently supported)."))
+    rlang::abort(paste0("Can't find data for `", name, "`."))
   }
   list(context, what)
 }
@@ -89,4 +96,12 @@
     result[[part_names[ii]]] <- sequence[, part_start[ii]:part_end[ii]]
   }
   result
+}
+
+# Converts a named list of vectors to a data frame
+.list2df <- function(ll) {
+  out <- lapply(names(ll), function(name) {
+    data.frame(name = name, value = ll[[name]], stringsAsFactors = FALSE)
+  })
+  do.call(rbind, out)
 }
