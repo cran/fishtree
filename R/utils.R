@@ -4,10 +4,6 @@
 #' @noRd
 .baseurl <- "https://fishtreeoflife.org/"
 
-#' Cache object, to avoid redownloading massive files constantly
-#' @noRd
-.cache <- rlang::new_environment()
-
 #' Gets data from a URL, or a cache keyed by the same
 #'
 #' Uses the `.cache` internal object to check if an object keyed by `url` exists.
@@ -20,26 +16,22 @@
 #' @param quiet Should we \code{\link{download.file}} quietly? Defaults to `TRUE`.
 #' @param ... Additional arguments passed to `reader`.
 #' @return Whatever `reader` returns.
+#' @import memoise
 #' @noRd
-.get <- function(url, reader, quiet = TRUE, ...) {
-  if (exists(url, envir = .cache)) {
-    return(get(url, envir = .cache))
-  }
-
+.get <- memoise::memoise(function(url, reader, ...) {
   if (rlang::is_missing(reader)) {
     rlang::abort("reader` must be specified when `url` is not in the cache.")
   }
   tmp <- tempfile()
-  res <- tryCatch(suppressWarnings(utils::download.file(url, tmp, quiet = quiet)),
+  res <- tryCatch(suppressWarnings(utils::download.file(url, tmp, quiet = getOption("fishtree.quiet", TRUE))),
                   error = function(e) {
                     rlang::abort(paste("Download for URL", url, "failed with error:\n  ", e, "\nCheck your network status and consider retrying your request."))
                   })
   if (res != 0L) {
     rlang::abort(paste("Download for URL", url, "failed with error code", res))
   }
-  assign(url, reader(tmp, ...), envir = .cache)
-  .get(url)
-}
+  reader(tmp, ...)
+})
 
 #' Reconcile names against a known good set
 #'
@@ -96,12 +88,4 @@
     result[[part_names[ii]]] <- sequence[, part_start[ii]:part_end[ii]]
   }
   result
-}
-
-# Converts a named list of vectors to a data frame
-.list2df <- function(ll) {
-  out <- lapply(names(ll), function(name) {
-    data.frame(name = name, value = ll[[name]], stringsAsFactors = FALSE)
-  })
-  do.call(rbind, out)
 }

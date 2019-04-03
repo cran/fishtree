@@ -8,9 +8,11 @@ status](https://www.r-pkg.org/badges/version/fishtree)](https://cran.r-project.o
 
 # fishtree
 
-The goal of `fishtree` is to provide an easy interface to the Fish Tree
-of Life API, to download taxonomies, phylogenies, diversification rate
-information, and other data for ray-finned fishes.
+The goal of `fishtree` is to provide an easy interface in R to the Fish
+Tree of Life API, to download taxonomies, phylogenies, diversification
+rate information, and other data for ray-finned fishes. It should
+seamlessly integrate with the rest of the R ecosystem, especially the
+package `ape`.
 
 ## Example
 
@@ -52,6 +54,8 @@ plot(phy, show.tip.label = FALSE)
 ltt.plot(phy)
 ```
 
+You can also check out the vignettes for more detailed examples.
+
 ## Installation
 
 You can install the released version of fishtree from
@@ -69,7 +73,24 @@ devtools::install_github("jonchang/fishtree")
 
 ## References
 
-The manuscript for this package is currently in review.
+To cite `fishtree` in publications use:
+
+Chang, J., Rabosky, D. L., Smith, S. A., & Alfaro, M. E. (2019). An R
+package and online resource for macroevolutionary studies using the
+ray‐finned fish tree of life. Methods in Ecology and Evolution. doi:
+[10.1111/2041-210x.13182](https://doi.org/10.1111/2041-210x.13182)
+
+The primary data source for `fishtree` was published as a part of:
+
+Rabosky, D. L., Chang, J., Title, P. O., Cowman, P. F., Sallan, L.,
+Friedman, M., … Alfaro, M. E. (2018). An inverse latitudinal gradient in
+speciation rate for marine fishes. Nature, 559(7714), 392–395. doi:
+[10.1038/s41586-018-0273-1](https://doi.org/10.1038/s41586-018-0273-1)
+
+## License
+
+The `fishtree` package is licensed under a [2-clause BSD
+license](https://opensource.org/licenses/BSD-2-Clause).
 
 ## Releasing
 
