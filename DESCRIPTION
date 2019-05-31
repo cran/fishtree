@@ -1,7 +1,7 @@
 Package: fishtree
 Type: Package
 Title: Interface to the Fish Tree of Life API
-Version: 0.3.0
+Version: 0.3.1
 Authors@R: c(
     person("Jonathan", "Chang", role = c("aut", "cre"),
            email = "jonathan.chang@ucla.edu",
@@ -27,11 +27,11 @@ Suggests: rfishbase, hisse, geiger, knitr, rmarkdown, picante,
 VignetteBuilder: knitr
 Language: en-US
 NeedsCompilation: no
-Packaged: 2019-04-03 00:20:12 UTC; jcha0080
+Packaged: 2019-05-31 20:24:54 UTC; jonchang
 Author: Jonathan Chang [aut, cre] (<https://orcid.org/0000-0002-3811-1254>),
   Michael E Alfaro [ctb],
   Daniel L Rabosky [ctb],
   Stephen A Smith [ctb]
 Maintainer: Jonathan Chang <jonathan.chang@ucla.edu>
 Repository: CRAN
-Date/Publication: 2019-04-03 04:20:03 UTC
+Date/Publication: 2019-05-31 21:10:04 UTC

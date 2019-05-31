@@ -11,9 +11,16 @@
 #' @return An object of class `"phylo"`.
 #' @references Rabosky, D. L., Chang, J., Title, P. O., Cowman, P. F., Sallan, L., Friedman, M., Kashner, K., Garilao, C., Near, T. J., Coll, M., Alfaro, M. E. (2018). An inverse latitudinal gradient in speciation rate for marine fishes. Nature, 559(7714), 392–395. doi:10.1038/s41586-018-0273-1
 #' @examples
+#' # Get a phylogeny for a taxonomic rank
 #' surgeons <- fishtree_phylogeny(rank = "Acanthuridae")
 #'
+#' # Get a phylogeny for only certain species
+#' genomic_fish <- c("Oryzias latipes", "Tetraodon nigroviridis",
+#'                   "Gasterosteus aculeatus", "Danio rerio")
+#' fishtree_phylogeny(species = genomic_fish)
+#'
 #' # Chronograms may not be ultrametric due to numerical precision issues
+#' # Consider using phytools::force.ultrametric
 #' ape::is.ultrametric(surgeons)
 #' ape::is.ultrametric(surgeons, tol = 0.00001)
 #'
@@ -231,15 +238,14 @@ fishtree_tip_rates <- function(species, rank, sampled_only = TRUE) {
   if (rlang::is_missing(species) && rlang::is_missing(rank)) return(rates)
 
   if (!rlang::is_missing(species)) {
-    # Figure out what species are in the tree to begin with
+    # Figure out which species are sampled
     tree <- fishtree_phylogeny()
     tips <- gsub("_", " ", tree$tip.label)
-    requested_species <- gsub("_", " ", species)
-    sampled_species <- rates[rates$species %in% intersect(requested_species, tips), ]
-    all_species <- rates[rates$species %in% requested_species, ]
-    if (sampled_only) wanted <- sampled_species
-    else wanted <- all_species
-    return(wanted)
+    if (sampled_only) wanted <- rates$species[rates$species %in% tips]
+    else wanted <- rates$species
+
+    names_to_get <- .name_check(species, valid_names = wanted)
+    return(rates[rates$species %in% names_to_get, ])
   }
 
   if (!rlang::is_missing(rank)) {
@@ -284,7 +290,6 @@ fishtree_tip_rates <- function(species, rank, sampled_only = TRUE) {
 #'   ape::tiplabels(pch = 19, col = ifelse(tree[[ii]]$tip.label %in% new_tips, "red", NA))
 #' }
 #' }
-#' @import parallel
 fishtree_complete_phylogeny <- function(species, rank, mc.cores = getOption("mc.cores", 1L)) {
   if (!rlang::is_missing(species) && !rlang::is_missing(rank)) rlang::abort("Must supply at most one of either `species` or `rank`, not both")
 

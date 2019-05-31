@@ -313,7 +313,10 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <a class="sourceLine" id="cb1-5" title="5"><span class="kw">requireNamespace</span>(<span class="st">&quot;picante&quot;</span>)</a>
 <a class="sourceLine" id="cb1-6" title="6"><span class="co">#&gt; Loading required namespace: picante</span></a>
 <a class="sourceLine" id="cb1-7" title="7"><span class="kw">requireNamespace</span>(<span class="st">&quot;geiger&quot;</span>)</a>
-<a class="sourceLine" id="cb1-8" title="8"><span class="co">#&gt; Loading required namespace: geiger</span></a></code></pre></div>
+<a class="sourceLine" id="cb1-8" title="8"><span class="co">#&gt; Loading required namespace: geiger</span></a>
+<a class="sourceLine" id="cb1-9" title="9"><span class="co">#&gt; Registered S3 method overwritten by &#39;geiger&#39;:</span></a>
+<a class="sourceLine" id="cb1-10" title="10"><span class="co">#&gt;   method            from</span></a>
+<a class="sourceLine" id="cb1-11" title="11"><span class="co">#&gt;   unique.multiPhylo ape</span></a></code></pre></div>
 <p>Next we’ll start downloading some data from <code>rfishbase</code>. We’ll be seeing if reef-associated ray-finned fish species are clustered or overdispersed in the Atlantic, Pacific, and Indian Oceans.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="co"># Get reef-associated species from the `species` table</span></a>
 <a class="sourceLine" id="cb2-2" title="2">reef_species &lt;-<span class="st"> </span>rfishbase<span class="op">::</span><span class="kw">species</span>(<span class="dt">fields =</span> <span class="kw">c</span>(<span class="st">&quot;Species&quot;</span>, <span class="st">&quot;DemersPelag&quot;</span>))</a>
@@ -345,22 +348,22 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <p>We’ll run <code>ses.mpd</code> and <code>ses.mntd</code> with only 100 iterations, to speed up the analysis. For a real analysis you would likely increase this to 1000, and possibly test other null models if your datasets have e.g., abundance information.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">picante<span class="op">::</span><span class="kw">ses.mpd</span>(sample_matrix, cophen, <span class="dt">null.model =</span> <span class="st">&quot;taxa.labels&quot;</span>, <span class="dt">runs =</span> <span class="dv">99</span>)</a>
 <a class="sourceLine" id="cb6-2" title="2"><span class="co">#&gt;                ntaxa  mpd.obs mpd.rand.mean mpd.rand.sd mpd.obs.rank</span></a>
-<a class="sourceLine" id="cb6-3" title="3"><span class="co">#&gt; Atlantic Ocean   637 238.3167      231.8750   2.3511795          100</span></a>
-<a class="sourceLine" id="cb6-4" title="4"><span class="co">#&gt; Indian Ocean    1222 233.5305      231.8209   1.2132987           92</span></a>
-<a class="sourceLine" id="cb6-5" title="5"><span class="co">#&gt; Pacific Ocean   1511 232.1380      231.9482   0.9213899           56</span></a>
+<a class="sourceLine" id="cb6-3" title="3"><span class="co">#&gt; Atlantic Ocean   637 238.3167      232.2084   1.8066282          100</span></a>
+<a class="sourceLine" id="cb6-4" title="4"><span class="co">#&gt; Indian Ocean    1222 233.5305      231.8798   1.2929589           86</span></a>
+<a class="sourceLine" id="cb6-5" title="5"><span class="co">#&gt; Pacific Ocean   1511 232.1380      231.8682   0.7284014           65</span></a>
 <a class="sourceLine" id="cb6-6" title="6"><span class="co">#&gt;                mpd.obs.z mpd.obs.p runs</span></a>
-<a class="sourceLine" id="cb6-7" title="7"><span class="co">#&gt; Atlantic Ocean 2.7397865      1.00   99</span></a>
-<a class="sourceLine" id="cb6-8" title="8"><span class="co">#&gt; Indian Ocean   1.4090584      0.92   99</span></a>
-<a class="sourceLine" id="cb6-9" title="9"><span class="co">#&gt; Pacific Ocean  0.2059015      0.56   99</span></a>
+<a class="sourceLine" id="cb6-7" title="7"><span class="co">#&gt; Atlantic Ocean 3.3810650      1.00   99</span></a>
+<a class="sourceLine" id="cb6-8" title="8"><span class="co">#&gt; Indian Ocean   1.2766983      0.86   99</span></a>
+<a class="sourceLine" id="cb6-9" title="9"><span class="co">#&gt; Pacific Ocean  0.3702948      0.65   99</span></a>
 <a class="sourceLine" id="cb6-10" title="10">picante<span class="op">::</span><span class="kw">ses.mntd</span>(sample_matrix, cophen, <span class="dt">null.model =</span> <span class="st">&quot;taxa.labels&quot;</span>, <span class="dt">runs =</span> <span class="dv">99</span>)</a>
 <a class="sourceLine" id="cb6-11" title="11"><span class="co">#&gt;                ntaxa mntd.obs mntd.rand.mean mntd.rand.sd mntd.obs.rank</span></a>
-<a class="sourceLine" id="cb6-12" title="12"><span class="co">#&gt; Atlantic Ocean   637 41.62559       47.82941    1.2863968             1</span></a>
-<a class="sourceLine" id="cb6-13" title="13"><span class="co">#&gt; Indian Ocean    1222 34.98367       37.96634    0.6729223             1</span></a>
-<a class="sourceLine" id="cb6-14" title="14"><span class="co">#&gt; Pacific Ocean   1511 34.00154       34.88723    0.4875821             5</span></a>
+<a class="sourceLine" id="cb6-12" title="12"><span class="co">#&gt; Atlantic Ocean   637 41.62559       47.83711    1.4396703             1</span></a>
+<a class="sourceLine" id="cb6-13" title="13"><span class="co">#&gt; Indian Ocean    1222 34.98367       37.89510    0.6658603             1</span></a>
+<a class="sourceLine" id="cb6-14" title="14"><span class="co">#&gt; Pacific Ocean   1511 34.00154       34.90489    0.4914791             4</span></a>
 <a class="sourceLine" id="cb6-15" title="15"><span class="co">#&gt;                mntd.obs.z mntd.obs.p runs</span></a>
-<a class="sourceLine" id="cb6-16" title="16"><span class="co">#&gt; Atlantic Ocean  -4.822635       0.01   99</span></a>
-<a class="sourceLine" id="cb6-17" title="17"><span class="co">#&gt; Indian Ocean    -4.432407       0.01   99</span></a>
-<a class="sourceLine" id="cb6-18" title="18"><span class="co">#&gt; Pacific Ocean   -1.816505       0.05   99</span></a></code></pre></div>
+<a class="sourceLine" id="cb6-16" title="16"><span class="co">#&gt; Atlantic Ocean  -4.314548       0.01   99</span></a>
+<a class="sourceLine" id="cb6-17" title="17"><span class="co">#&gt; Indian Ocean    -4.372430       0.01   99</span></a>
+<a class="sourceLine" id="cb6-18" title="18"><span class="co">#&gt; Pacific Ocean   -1.838023       0.04   99</span></a></code></pre></div>
 <p>The Atlantic and Indian Oceans are overdispersed using the MPD metric, and all three oceans are clustered under the MNTD metric. MNTD is thought to be more sensitive to patterns closer to the root of the tree. We can confirm these patterns visually:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">plot</span>(phy, <span class="dt">show.tip.label =</span> <span class="ot">FALSE</span>, <span class="dt">no.margin =</span> <span class="ot">TRUE</span>)</a>
 <a class="sourceLine" id="cb7-2" title="2">obj &lt;-<span class="st"> </span><span class="kw">get</span>(<span class="st">&quot;last_plot.phylo&quot;</span>, .PlotPhyloEnv)</a>

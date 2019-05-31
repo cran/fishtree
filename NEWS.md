@@ -1,6 +1,8 @@
-# fishtree 0.3.0
+# fishtree 0.3.1
 
-# fishtree (development version)
+* `fishtree_tip_rates` now warns on missing / invalid species.
+
+# fishtree 0.3.0
 
 * New function: `fishtree_complete_phylogeny`, gets complete phylogenies
   where unsampled taxa were placed using stochastic polytomy resolution.
