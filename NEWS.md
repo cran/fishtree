@@ -1,3 +1,17 @@
+# fishtree 0.3.2
+
+* `fishtree_alignment()` now works correctly with `species = ...` arguments.
+
+* The internal `.name_check` function now emits structured warning output.
+  This means that users supplying species names to e.g., `fishtree_phylogeny`
+  that do not have matches in the taxonomy may use functions that capture
+  warning messages to programatically determine which species are missing,
+  without parsing error messages.
+
+* Converted some warnings to messages.
+
+* Minor documentation changes.
+
 # fishtree 0.3.1
 
 * `fishtree_tip_rates` now warns on missing / invalid species.
@@ -12,7 +26,7 @@
 * New global option `fishtree.quiet`: when set to `FALSE`, be more verbose
   during downloads (can help with debugging issues).
 
-* Some internal reorganization
+* Some internal reorganization.
 
 # fishtree 0.2.0
 
@@ -29,4 +43,4 @@
 
 # fishtree 0.1.0
 
-Initial release.
+* Initial release.
