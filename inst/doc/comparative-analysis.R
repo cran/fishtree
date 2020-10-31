@@ -84,29 +84,32 @@ for (ii in 1:length(tiporder)) {
 library(hisse)
 
 ## ----run_bisse----------------------------------------------------------------
-trans.rates.bisse <- ParEqual(TransMatMaker(hidden.states = FALSE), c(1, 2))
+trans.rates.bisse <- TransMatMakerHiSSE()
 
-pp.bisse.full <- hisse(tree, reef, hidden.states = FALSE,
-                       turnover.anc = c(1,2,0,0), eps.anc = c(1,1,0,0),
-                       trans.rate = trans.rates.bisse, output.type="raw")
+pp.bisse.full <- hisse(tree, reef,
+                       hidden.states = FALSE, sann = FALSE,
+                       turnover = c(1, 2), eps = c(1, 1),
+                       trans.rate = trans.rates.bisse)
 
-pp.bisse.null <- hisse(tree, reef, hidden.states = FALSE,
-                       turnover.anc = c(1,1,0,0), eps.anc = c(1,1,0,0),
-                       trans.rate = trans.rates.bisse, output.type="raw")
+pp.bisse.null <- hisse(tree, reef,
+                       hidden.states = FALSE, sann = FALSE,
+                       turnover = c(1, 1), eps = c(1, 1),
+                       trans.rate = trans.rates.bisse)
 
 ## ----run_hisse----------------------------------------------------------------
-trans.rates.hisse <- TransMatMaker(hidden.states = TRUE)
-trans.rates.hisse <- ParDrop(trans.rates.hisse, c(3,5,8,10))
-trans.rates.hisse <- ParEqual(trans.rates.hisse, c(1,2,1,3,1,4,1,5,1,6,1,7,1,8))
+trans.rates.hisse <- TransMatMakerHiSSE(hidden.traits = 1)
+trans.rates.hisse <- ParEqual(trans.rates.hisse, c(1, 2, 1, 3, 1, 4, 1, 5))
 
-pp.hisse.full <- hisse(tree, reef, hidden.states = TRUE,
-                       turnover.anc=c(1,2,3,4), eps.anc=c(1,1,1,1),
-                       trans.rate=trans.rates.hisse, output.type="raw")
+pp.hisse.full <- hisse(tree, reef,
+                       hidden.states = TRUE, sann = FALSE,
+                       turnover = c(1, 2, 3, 4), eps = c(1, 1, 1, 1),
+                       trans.rate = trans.rates.hisse)
 
 ## ----run_hisse_null-----------------------------------------------------------
-pp.hisse.null2 <- hisse(tree, reef, hidden.states = TRUE,
-                        turnover.anc=c(1,1,2,2), eps.anc=c(1,1,1,1),
-                        trans.rate=trans.rates.hisse, output.type="raw")
+pp.hisse.null2 <- hisse(tree, reef,
+                        hidden.states = TRUE, sann = FALSE,
+                        turnover = c(1, 1, 2, 2), eps = c(1, 1, 1, 1),
+                        trans.rate = trans.rates.hisse)
 
 ## ----get_hisse_results--------------------------------------------------------
 results <- list(pp.bisse.full, pp.bisse.null, pp.hisse.null2, pp.hisse.full)

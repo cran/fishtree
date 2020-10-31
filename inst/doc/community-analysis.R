@@ -10,9 +10,9 @@ knitr::opts_chunk$set(
 ## ----load-packages------------------------------------------------------------
 library(ape)
 library(fishtree)
-requireNamespace("rfishbase")
-requireNamespace("picante")
-requireNamespace("geiger")
+loadNamespace("rfishbase")
+loadNamespace("picante")
+loadNamespace("geiger")
 
 ## ----get-data-----------------------------------------------------------------
 # Get reef-associated species from the `species` table
@@ -43,7 +43,7 @@ sample_matrix <- t(sample_matrix)
 picante::ses.mpd(sample_matrix, cophen, null.model = "taxa.labels", runs = 99)
 picante::ses.mntd(sample_matrix, cophen, null.model = "taxa.labels", runs = 99)
 
-## ----plot, fig.width = 7, fig.height = 15-------------------------------------
+## ----plot, fig.width = 7, fig.height = 20-------------------------------------
 plot(phy, show.tip.label = FALSE, no.margin = TRUE)
 obj <- get("last_plot.phylo", .PlotPhyloEnv)
 
@@ -55,6 +55,4 @@ for (ii in 1:ncol(matr)) {
   present_idx <- matr[, ii] == 1
   points(xx[present_idx] + ii, yy[present_idx], col = cols[ii], cex = 0.1)
 }
-
-
 
