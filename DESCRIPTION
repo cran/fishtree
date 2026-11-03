@@ -1,7 +1,7 @@
 Package: fishtree
 Type: Package
 Title: Interface to the Fish Tree of Life API
-Version: 0.3.4
+Version: 0.4.0
 Authors@R: c(
     person("Jonathan", "Chang", role = c("aut", "cre"),
            email = "me@jonathanchang.org",
@@ -15,23 +15,24 @@ Description: An interface to the Fish Tree of Life API to download taxonomies,
     ray-finned fishes.
 License: BSD_2_clause + file LICENSE
 Encoding: UTF-8
-LazyData: true
-RoxygenNote: 7.1.1
+RoxygenNote: 7.3.3
 URL: https://fishtreeoflife.org/, https://github.com/jonchang/fishtree
 BugReports: https://github.com/jonchang/fishtree/issues
 Depends: R (>= 4.0)
-Imports: ape (>= 5.2), jsonlite (>= 1.5), memoise, parallel, rlang (>=
-        0.4.1), utils
-Suggests: diversitree, geiger, hisse (>= 1.9.10), knitr, markdown,
-        phytools, picante, rfishbase, rmarkdown, spelling, testthat
+Imports: ape (>= 5.2), jsonlite (>= 1.5), lifecycle (>= 1.0.0),
+        memoise, parallel, rlang (>= 0.4.1), utils
+Suggests: diversitree, geiger, hisse (>= 2.1.11), knitr, markdown,
+        phytools, picante, rfishbase (>= 4.1.2), rmarkdown, spelling,
+        testthat (>= 3.1.7), withr
 VignetteBuilder: knitr
 Language: en-US
 NeedsCompilation: no
-Packaged: 2021-01-28 04:06:30 UTC; jonchang
-Author: Jonathan Chang [aut, cre] (<https://orcid.org/0000-0002-3811-1254>),
+Packaged: 2026-11-02 23:43:23 UTC; jonchang
+Author: Jonathan Chang [aut, cre] (ORCID:
+    <https://orcid.org/0000-0002-3811-1254>),
   Michael E Alfaro [ctb],
   Daniel L Rabosky [ctb],
   Stephen A Smith [ctb]
 Maintainer: Jonathan Chang <me@jonathanchang.org>
 Repository: CRAN
-Date/Publication: 2021-01-31 00:50:06 UTC
+Date/Publication: 2026-11-03 00:30:02 UTC

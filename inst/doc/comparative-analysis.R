@@ -6,11 +6,12 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+options("duckdbfs_use_nightly" = FALSE)
 
 ## ----get_phylo, fig.width = 7, fig.height = 7---------------------------------
 library(fishtree)
 
-tree <- fishtree_phylogeny(rank = "Tetraodontiformes")
+tree <- fishtree_phylogeny(taxon = "Tetraodontiformes")
 
 plot(tree, show.tip.label = FALSE, no.margin = TRUE)
 
@@ -46,7 +47,7 @@ reef <- reef[!rownames(reef) %in% nc$data_not_tree, ]
 Ntip(tree) == nrow(reef)
 
 ## ----getrates-----------------------------------------------------------------
-rates <- fishtree_tip_rates(rank = "Tetraodontiformes")
+rates <- fishtree_tip_rates(taxon = "Tetraodontiformes")
 head(rates)
 
 ## ----merge--------------------------------------------------------------------

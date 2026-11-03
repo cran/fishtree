@@ -41,7 +41,7 @@ lineage through time plot.
 
 ``` r
 library(ape)
-phy <- fishtree_phylogeny(rank = "Acanthuridae")
+phy <- fishtree_phylogeny(taxon = "Acanthuridae")
 phy
 #> 
 #> Phylogenetic tree with 67 tips and 66 internal nodes.
@@ -49,7 +49,7 @@ phy
 #> Tip labels:
 #>   Acanthurus_mata, Acanthurus_blochii, Acanthurus_xanthopterus, Acanthurus_bariene, Acanthurus_dussumieri, Acanthurus_leucocheilus, ...
 #> 
-#> Rooted; includes branch lengths.
+#> Rooted; includes branch length(s).
 ```
 
 ``` r

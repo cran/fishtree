@@ -16,6 +16,7 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+options("duckdbfs_use_nightly" = FALSE)
 ```
 
 To demonstrate the functionality of the `fishtree` package and how it integrates well with the rest of the R phylogenetics ecosystem, this vignette will walk you through a simple comparative analysis.
@@ -30,7 +31,7 @@ First, load the `fishtree` package and download the subset of the Fish Tree of L
 ```{r get_phylo, fig.width = 7, fig.height = 7}
 library(fishtree)
 
-tree <- fishtree_phylogeny(rank = "Tetraodontiformes")
+tree <- fishtree_phylogeny(taxon = "Tetraodontiformes")
 
 plot(tree, show.tip.label = FALSE, no.margin = TRUE)
 ```
@@ -91,7 +92,7 @@ Ntip(tree) == nrow(reef)
 There are several other data sources available in the `fishtree` package, including speciation rates computed via the DR method ([Jetz et al. 2012](https://doi.org/10.1038/nature11631)). Retrieve speciation rate data:
 
 ```{r getrates}
-rates <- fishtree_tip_rates(rank = "Tetraodontiformes")
+rates <- fishtree_tip_rates(taxon = "Tetraodontiformes")
 head(rates)
 ```
 
